@@ -28,4 +28,3 @@ import errorMonitor from "./lib/wxAppErrorMonitor"；
 - appOptions：小程序加载参数
 - systemInfo：系统信息
 - errorMsg：错误内容
-- extraData：额外需要上报的内容
