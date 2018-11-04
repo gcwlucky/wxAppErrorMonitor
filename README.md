@@ -17,7 +17,8 @@ import errorMonitor from "./lib/wxAppErrorMonitor"；
             reqUrl: '',              //必填：上报url
             reportType: '', //选填：上报方式：sync（同步）/async（异步），默认为sync
             triggerNum: 2,          //选填：当reportType=async时有效，表示本地错误日志达到多少条时进行上报，默认为3
-            extraData: this.globalData         //选填：额外上报信息，function/object
+            extraData: this.globalData,         //选填：额外上报信息，function/object
+            monitorKey: '0'         //选填：String，小程序后台运维中心-监控告警的监控id，默认为''，则不上报
         })
 ```
 

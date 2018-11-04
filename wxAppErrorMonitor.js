@@ -7,7 +7,8 @@ let appOptions,                  //小程序加载参数
         reqUrl: '',              //必填：上报url
         reportType: '',          //选填：上报方式：sync（同步）/async（异步），默认为sync
         triggerNum: '',          //选填：当reportType=async时有效，表示本地错误日志达到多少条时进行上报，默认为3
-        extraData: null          //选填：额外上报信息，function/object，默认为null
+        extraData: null,         //选填：额外上报信息，function/object，默认为null
+        monitorKey: ''         //选填：String，小程序后台运维中心-监控告警的监控id，默认为''，则不上报
     },
     initSuccess = false          //是否初始化成功
 
@@ -26,6 +27,7 @@ function init(config) {
     _config.reportType = config.reportType || 'sync';
     _config.triggerNum = config.triggerNum || 3;
     _config.extraData = config.extraData || null;
+    _config.monitorKey = config.monitorKey || '';
     if (!_config.reqUrl) {
         console.log("上报url不能为空");
         return;
@@ -75,6 +77,9 @@ function _getReportData(msg) {
 }
 
 function _handleReport(msg) {
+    if(_config.monitorKey) {
+        wx.reportMonitor(_config.monitorKey, 1)
+    }
     if (!initSuccess) {
         console.log('handleReport error: 初始化配置失败')
         return;
